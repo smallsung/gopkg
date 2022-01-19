@@ -163,3 +163,9 @@ func Details(err error) string {
 
 	return strings.Join(lines, "\n")
 }
+
+func PC(pc uintptr) runtime.Frame {
+	frames := runtime.CallersFrames([]uintptr{pc})
+	frame, _ := frames.Next()
+	return frame
+}

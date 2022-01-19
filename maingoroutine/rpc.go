@@ -70,8 +70,6 @@ func (api *debugAPI) Pc(hex string) (runtime.Frame, error) {
 	if pc, err := strconv.ParseUint(hex, 0, 64); err != nil {
 		return runtime.Frame{}, err
 	} else {
-		frames := runtime.CallersFrames([]uintptr{uintptr(pc)})
-		frame, _ := frames.Next()
-		return frame, nil
+		return errors.PC(uintptr(pc)), nil
 	}
 }
